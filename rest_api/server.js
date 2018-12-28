@@ -1,11 +1,15 @@
 const express = require("express")
 const morgan = require("morgan")
+const bodyParser = require("body-parser")
+const errorHandler = require("errorhandler")
 
 // Instantiate express 
 const app = express()
 
 // Middleware
 app.use(morgan("dev"))
+app.use(bodyParser.json())
+app.use(errorHandler)
 
 // Testing server
 app.get("/", (req, res) => {
