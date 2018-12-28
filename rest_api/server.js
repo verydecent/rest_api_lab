@@ -25,9 +25,15 @@ app.get('/accounts', (req, res) => {
 })
 
 app.post('/accounts', (req, res) => {
-  let newAccount = req.body
-  let id = store.accounts.length
+  if(!req.body.username || !req.body.password) {
+    return res.sendStatus(400)
+  }
+  let newAccount = {
+    username: req.body.username,
+    password: req.body.password
+  }
   store.accounts.push(newAccount)
+  let id = store.accounts.length
   res.status(201).send({ id: id })
 })
 
